@@ -1,0 +1,21 @@
+{
+  "lang": "en",
+  "name": "JTORLEON STUDIOS TEAM",
+  "short_name": "jtl-team",
+  "description": "Tree Link Of JTL Team",
+  "icons": [
+    {
+      "src": "/assets/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ff3e4b",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
