@@ -1,6 +1,5 @@
 name: Check Privacy File Change
 
-# Ce workflow s'exécute à chaque push sur la branche main.
 on:
   push:
     branches:
@@ -13,11 +12,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
       
-    - name: Check if privacy.txt has changed
+    - name: Check if privacy-policy.txt has changed
       id: file-check
       run: |
-        # Vérifie si www/privacy.txt a changé dans le dernier commit
-        if git diff --name-only HEAD^ HEAD | grep -q "www/privacy.txt"; then
+        # Vérifie si www/privacy-policy.txt a changé dans le dernier commit
+        if git diff --name-only HEAD^ HEAD | grep -q "www/privacy-policy.txt"; then
           echo "file_changed=true" >> $GITHUB_ENV
         else
           echo "file_changed=false" >> $GITHUB_ENV
@@ -26,7 +25,7 @@ jobs:
     - name: Run task if file has changed
       if: env.file_changed == 'true'
       run: |
-        echo "The file www/privacy.txt has changed."
+        echo "The file www/privacy-policy.txt has changed."
         # Ajoute ici la commande que tu souhaites exécuter
         # Par exemple, un script de build ou une autre action
         # npm run build
