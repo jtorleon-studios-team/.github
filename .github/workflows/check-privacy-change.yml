@@ -14,21 +14,21 @@ jobs:
       
     - name: Check if privacy-policy.txt has changed
       id: file-check
-      run: | 
+      run: |
         if [ $(git rev-list --count HEAD) -eq 1 ]; then
           git diff-tree --no-commit-id --name-only -r HEAD | grep -q "www/privacy-policy.txt"
         else
           git diff --name-only HEAD^ HEAD | grep -q "www/privacy-policy.txt"
         fi
-         
+        
+        # define var 
         if [ $? -eq 0 ]; then
           echo "file_changed=true" >> $GITHUB_ENV
         else
           echo "file_changed=false" >> $GITHUB_ENV
         fi
-        
+
     - name: Run task if file has changed
       if: env.file_changed == 'true'
       run: |
-        echo "The file www/privacy-policy.txt has changed."
-       
+        echo "The file www/privacy-policy.txt has changed." 
