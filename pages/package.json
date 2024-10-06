@@ -1,0 +1,51 @@
+{
+  "name": "jtorleon-studios-tree-link",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {
+    "ng": "ng",
+    "dev": "ng serve",
+    "start": "ng serve",
+    "build": "ng build --localize --optimization --base-href /pages/dist/browser/",
+    "watch_for_express": "ng build --watch --localize --configuration development --base-href /",
+    "watch_for_liveserver": "ng build --localize --watch --configuration development --base-href /pages/dist/browser/",
+    "test": "ng test",
+    "extract_i18n": "ng extract-i18n --format json --output-path src/locale"
+  },
+  "dependencies": {
+    "@angular/animations": "^17.0.0",
+    "@angular/common": "^17.0.0",
+    "@angular/compiler": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/platform-browser": "^17.0.0",
+    "@angular/platform-browser-dynamic": "^17.0.0",
+    "@angular/router": "^17.0.0",
+    "rxjs": "~7.8.0",
+    "three": "^0.168.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.14.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^17.0.7",
+    "@angular/cli": "^17.0.7",
+    "@angular/compiler-cli": "^17.0.7",
+    "@angular/localize": "^17.0.7",
+    "@eslint/js": "^9.2.0",
+    "@types/chart.js": "^2.9.41",
+    "@types/jasmine": "~5.1.0",
+    "@types/three": "^0.168.0",
+    "@types/uuid": "^9.0.8",
+    "eslint": "^8.57.0",
+    "globals": "^15.2.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "prettier": "^3.2.5",
+    "typescript": "~5.2.2",
+    "typescript-eslint": "^7.8.0"
+  }
+}

@@ -1,7 +1,7 @@
-![Auto Assign](https://github.com/jtorleon-studios-team/.github/actions/workflows/auto-assign.yml/badge.svg)
+ 
+# JTORLEON STUDIOS TEAM
 
-![Proof HTML](https://github.com/jtorleon-studios-team/.github/actions/workflows/proof-html.yml/badge.svg)
+## boilerplate gh actions (boosted)
 
-# JTORLEON STUUDIOS - README
 
-coming soon...
+

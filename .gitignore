@@ -1,34 +1,23 @@
-# Node.js modules
-node_modules/
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Build output
-dist/
-build/
+# output
+*dist/
+*build/
+*coverage/
+*.angular/
+*node_modules/
+*npm-debug.log*
+*yarn-debug.log*
+*yarn-error.log*
+*.log
 
 # Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
 
-# IDE and Editor specific files
-.vscode/
-.idea/
+# IDE
+*.vscode/
+*.idea/ 
 *.sublime-project
 *.sublime-workspace
-
-# OS generated files
-.DS_Store
-Thumbs.db
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# Other files
-*.log
