@@ -1,3 +1,0 @@
-User-agent: *
-Disallow: /assets/
-Sitemap: https://www.jtorleon-studios.com/sitemap.xml
