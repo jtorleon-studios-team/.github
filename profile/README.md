@@ -4,4 +4,7 @@
 
 We're digging through the code and laying down the foundation — more blocks coming soon! ⛏️🧱
 
-|| coming soon, in progress :) <3 || 
+<details>
+  <summary>🏗️</summary>
+  <p>coming soon, in progress 🧡</p>
+</details>
