@@ -2,7 +2,7 @@ name: Handle Discussion
 
 on:
   discussion:
-    types: [locked]
+    types: [unlocked]
 
 jobs:
   handle-discussion:
@@ -20,4 +20,6 @@ jobs:
               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
               -d '{"body": "Updated message for the discussion"}'
+            
+            echo "Discussion edited"
           fi
