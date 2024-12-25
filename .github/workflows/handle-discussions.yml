@@ -15,11 +15,26 @@ jobs:
 
           if [ "${{ github.event.discussion.category.name }}" == "Announcements" ]; then
             discussion_id="${{ github.event.discussion.id }}"
+            new_body="success"
 
-            curl -X PATCH "https://api.github.com/discussions/${{ github.event.discussion.id }}/comments/1" \
-              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              -d '{"body": "Updated message for the discussion"}'
-            
-            echo "Discussion edited"
+            query=$(jq -n \
+              --arg id "$discussion_id" \
+              --arg body "$new_body" \
+              '{"query": "mutation { updateDiscussion(input: {discussionId: \($id), body: \($body)}) { discussion { id body } } }"}'
+            )
+
+            response=$(curl -s -X POST \
+              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Content-Type: application/json" \
+              -d "$query" \
+              https://api.github.com/graphql
+            )
+
+            if echo "$response" | grep -q '"errors"'; then
+              echo "failed: $response"
+              exit 1
+            else
+              echo "succes discussion edited"
+            fi
+
           fi
