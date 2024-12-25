@@ -11,17 +11,25 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
       - run: |
-          echo "Discussion with id ${{ github.event.discussion.id }} locked in category ${{ github.event.discussion.category.name }} ${{ github.event.discussion.category.id }}"
+          echo "Discussion with id ${{ github.event.discussion.id }} unlocked in category ${{ github.event.discussion.category.name }} ${{ github.event.discussion.category.id }}"
 
           if [ "${{ github.event.discussion.category.name }}" == "Announcements" ]; then
             discussion_id="${{ github.event.discussion.id }}"
             new_body="success"
 
-            query=$(jq -n \
-              --arg id "$discussion_id" \
-              --arg body "$new_body" \
-              '{"query": "mutation { updateDiscussion(input: {discussionId: \($id), body: \($body)}) { discussion { id body } } }"}'
-            )
+          query=$(jq -n \
+            --arg id "$discussion_id" \
+            --arg body "$new_body" \
+            '{
+              "query": "mutation {
+                updateDiscussion(input: {discussionId: \($id), body: \($body)}) {
+                  discussion {
+                    id
+                    body
+                  }
+                }
+              }"
+            }')
 
             response=$(curl -s -X POST \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
