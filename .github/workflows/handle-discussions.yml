@@ -11,11 +11,11 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
       - run: |
-          echo "Discussion locked: ${{ github.event.discussion.title }}"
+          echo "Discussion with id ${{ github.event.discussion.id }} locked in category ${{ github.event.category.name }} ${{ github.event.category.id }}"
 
-          if [ "${{ github.event.discussion.title }}" == "announcements" ]; then
+          if [ "${{ github.event.category.name }}" == "Announcements" ]; then
             discussion_id="${{ github.event.discussion.id }}"
-
+            
             curl -X PATCH "https://api.github.com/discussions/${{ github.event.discussion.id }}/comments/1" \
               -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               -H "Accept: application/vnd.github.v3+json" \
