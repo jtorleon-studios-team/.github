@@ -1,0 +1,19 @@
+name: Handle Discussion
+
+on:
+  discussion:
+    types: [locked]
+
+jobs:
+  handle-discussion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+      - run: |
+          echo "Discussion locked: ${{ github.event.discussion.title }}"
+
+          if [ "${{ github.event.discussion.title }}" == "announcements" ]; then
+            echo "This is the 'announcements' discussion. Perform additional actions here."
+            # Ajoutez ici les actions que vous souhaitez effectuer lorsque le titre est "announcements"
+          fi
