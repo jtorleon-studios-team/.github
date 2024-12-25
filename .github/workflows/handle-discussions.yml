@@ -14,6 +14,10 @@ jobs:
           echo "Discussion locked: ${{ github.event.discussion.title }}"
 
           if [ "${{ github.event.discussion.title }}" == "announcements" ]; then
-            echo "This is the 'announcements' discussion. Perform additional actions here."
-            # Ajoutez ici les actions que vous souhaitez effectuer lorsque le titre est "announcements"
+            discussion_id="${{ github.event.discussion.id }}"
+
+            curl -X PATCH "https://api.github.com/discussions/${{ github.event.discussion.id }}/comments/1" \
+              -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              -d '{"body": "Updated message for the discussion"}'
           fi
