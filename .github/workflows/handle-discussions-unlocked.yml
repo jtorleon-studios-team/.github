@@ -34,12 +34,10 @@ jobs:
       - id: prepare-data
         name: Prepare data
         run: |
-          var="World"
-          str=$(cat <<EOF
-            # Stay in the Loop
-            ## New Updates and content You'll Love! 💥
-            Hello, $var!
-        EOF
+          str=$(cat <<END
+          # Stay in the Loop
+          ## New Updates and content You'll Love! 💥
+          END
           )
 
           echo "text=$str" >> $GITHUB_OUTPUT
