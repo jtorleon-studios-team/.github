@@ -44,10 +44,13 @@ jobs:
           str+="\n[Open on github]($discussion_url)"
 
           messageToJson=$( jq -n\
-            --arg content "$str" \
+            --arg content "|| $discussion_url ||" \
             '{
               content: $content,
-              embeds: [ ]
+              embeds: [
+                title: $title,
+                color: 39129,
+              ]
              }'\
           )
 
