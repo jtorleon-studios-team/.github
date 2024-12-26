@@ -36,7 +36,7 @@ jobs:
         run: |
           str=$(cat <<END
           Stay in the Loop
-          New Updates and content You'll Love!
+          New Updates and content You\'ll Love!
           END
           )
 
