@@ -14,7 +14,7 @@ jobs:
           echo "::group::Filter Discussion"
           echo "discussion ${{ github.event.discussion.node_id }} ${{ github.event.discussion.title }}"
           echo "discussion category ${{ github.event.discussion.category.node_id }} ${{ github.event.discussion.category.name }}"
-          if [ "${{ github.event.discussion.category.name }}" == "Pools" ]; then
+          if [ "${{ github.event.discussion.category.name }}" == "Polls" ]; then
             echo "match"
             echo "status=success" >> $GITHUB_OUTPUT
           else
