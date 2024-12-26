@@ -13,7 +13,7 @@ jobs:
 
       - id: prepare-data
         name: Prepare data
-        run: echo "text=Hello, World!" >> $GITHUB_OUTPUT
+        run: echo "text=Hello, World World!" >> $GITHUB_OUTPUT
 
       - name: Update Github Discussions
         run: |
