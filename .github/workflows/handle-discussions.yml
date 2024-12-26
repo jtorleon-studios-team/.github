@@ -11,10 +11,10 @@ jobs:
       - name: Checkout the repository
         uses: actions/checkout@v4
       - run: |
-          echo "Discussion with id ${{ github.event.discussion.id }} unlocked in category ${{ github.event.discussion.category.name }} ${{ github.event.discussion.category.id }}"
+          echo "Discussion with id ${{ github.event.discussion.node_id }} unlocked in category ${{ github.event.discussion.category.name }} ${{ github.event.discussion.category.node_id }}"
 
           if [ "${{ github.event.discussion.category.name }}" == "Announcements" ]; then 
-            response=$(curl -i -H 'Content-Type: application/json' -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" -X POST -d '{"query": "mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.id }}\", body: \"hello\"}) {discussion { id } }}"}' https://api.github.com/graphql)
+            response=$(curl -i -H 'Content-Type: application/json' -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" -X POST -d '{"query": "mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"hello\"}) {discussion { id } }}"}' https://api.github.com/graphql)
 
             if echo "$response" | grep -q '"errors"'; then
               echo "failed: $response"
