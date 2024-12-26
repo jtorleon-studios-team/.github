@@ -35,8 +35,8 @@ jobs:
         name: Prepare data
         run: |
           str=$(cat <<END
-          # Stay in the Loop
-          ## New Updates and content You'll Love! 💥
+          Stay in the Loop
+          New Updates and content You'll Love!
           END
           )
 
