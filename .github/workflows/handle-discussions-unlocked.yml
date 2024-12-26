@@ -34,12 +34,7 @@ jobs:
       - id: prepare-data
         name: Prepare data
         run: |
-          str=$(cat <<END
-          Stay in the Loop
-          New Updates and content You\'ll Love!
-          END
-          )
-
+          str=$(echo -e "# Stay in the Loop\n## New Updates and content You'll Love! 💥\nHello!")
           echo "text=$str" >> $GITHUB_OUTPUT
 
       - name: Update Github Discussions
