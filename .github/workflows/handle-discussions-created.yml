@@ -38,15 +38,16 @@ jobs:
           repo="${{ github.repository }}"
           discussion_id="${{ github.event.discussion.id }}"
           discussion_url="https://github.com/$owner/$repo/discussions/$discussion_id"
+          author_name="${{ github.event.sender.name }}"
+          avatar_url="${{ github.event.sender.avatar_url }}"
 
           messageToJson=$( jq -n\
-            --arg content "|| $discussion_url ||" \
             --arg title "A polls has been created" \
-            --arg author_name "${{ github.event.discussion.user.name }}" \
-            --arg avatar_url "${{ github.event.discussion.user.avatar_url }}" \
+            --arg author_name "$author_name" \
+            --arg avatar_url "$avatar_url"  \
             --arg open_url "$discussion_url" \
             '{
-              content: $content,
+              content: null,
               embeds: [
                 {
                   title: $title,
@@ -70,5 +71,7 @@ jobs:
               ]
              }'\
           )
+          curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}
 
+          messageToJson=$( jq -n--arg content "|| $discussion_url ||" '{ content: $content }')
           curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}
