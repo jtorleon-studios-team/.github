@@ -39,7 +39,7 @@ jobs:
             # Stay in the Loop
             ## New Updates and content You'll Love! 💥
             Hello, $var!
-            EOF
+        EOF
           )
 
           echo "text=$str" >> $GITHUB_OUTPUT
