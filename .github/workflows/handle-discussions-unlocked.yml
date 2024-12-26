@@ -38,7 +38,7 @@ jobs:
           strX="### 🔹 [From X/Twitter 📱](#)"
           strT="### 🔹 [Threads 🌐](#)"
 
-          body="strH \n $strX \n $strT"
+          body="$strH \n $strX \n $strT"
           script='{"query": "mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"'$body'\"}) {discussion { id } }}"}'
           curl -i -H 'Content-Type: application/json' \
             -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
