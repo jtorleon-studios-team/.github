@@ -46,7 +46,7 @@ jobs:
             --arg decodedBody "hello world" \
             '{discussionId: $discussionId, body: $decodedBody}' )
 
-          script="mutation {updateDiscussion(input: $payloadUpdateDiscussion) {discussion { id } }}"
+          script="mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"${{ steps.prepare-data.outputs.text }}\"}) {discussion { id } }}"
 
           curl -i -H 'Content-Type: application/json' \
             -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
