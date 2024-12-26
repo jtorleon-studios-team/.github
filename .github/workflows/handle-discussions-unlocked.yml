@@ -40,28 +40,10 @@ jobs:
 
       - name: Update Github Discussions
         run: |
-          decoded_str=$(echo "${{ steps.prepare-data.outputs.text }}" | base64 --decode)
+          textx=${{ steps.prepare-data.outputs.text }}
+          text="test"
 
-          query=$(cat <<EOF
-          {
-            "query": "mutation (\$discussionId: ID!, \$body: String!) { 
-              updateDiscussion(input: { discussionId: \$discussionId, body: \$body }) { 
-                discussion { id body }
-              }
-            }",
-            "variables": {
-              "discussionId": "${{ github.event.discussion.node_id }}",
-              "body": "$decoded_str"
-            }
-          }
-          EOF
-          )
-
-          response=$(curl -s -X POST \
-            -H 'Content-Type: application/json' \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -d "$query" \
-            https://api.github.com/graphql)
+          response=$(curl -i -H 'Content-Type: application/json' -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" -X POST -d "{\"query\": \"mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: $text}) {discussion { id } }}\"}" https://api.github.com/graphql)
 
           if echo "$response" | grep -q '"errors"'; then
             echo "failed: $response"
