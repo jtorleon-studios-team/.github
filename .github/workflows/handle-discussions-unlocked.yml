@@ -49,7 +49,7 @@ jobs:
             discussion { 
               id 
             } 
-          }'
+          }}'
 
           curl -i -H 'Content-Type: application/json' \
             -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
