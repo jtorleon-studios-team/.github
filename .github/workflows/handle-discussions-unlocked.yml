@@ -46,14 +46,11 @@ jobs:
             --arg decodedBody "hello world" \
             '{discussionId: $discussionId, body: $decodedBody}' )
 
-          payload=$( jq -n \
-            --arg mutation "mutation(\$discussionId: ID!, \$body: String!) { updateDiscussion(input: { discussionId: \$discussionId, body: \$body }) { discussion { id } } }" \
-            --argjson variables "$payloadUpdateDiscussion" \
-            '{query: "$mutation", variables: $variables}' )
+          script="mutation {updateDiscussion(input: $payloadUpdateDiscussion) {discussion { id } }}"
 
           curl -i -H 'Content-Type: application/json' \
-            -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -X POST -d "$playload" https://api.github.com/graphql
+            -H "Authorization: bearer ........." \
+            -X POST -d "{ \"query\": \"$script\"}" https://api.github.com/graphql
 
           if echo "$response" | grep -q '"errors"'; then
             echo "failed: $response"
