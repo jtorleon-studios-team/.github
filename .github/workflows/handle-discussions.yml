@@ -16,20 +16,7 @@ jobs:
 
           if [ "${{ github.event.discussion.category.name }}" == "Announcements" ]; then
             discussion_id="${{ github.event.discussion.id }}"
-
-            query=$(jq -n \
-              --arg id "$discussion_id" \
-              --arg body "test" \
-              '{
-                "query": "mutation { updateDiscussion(input: {discussionId: \"123\", body: \"hello\" }) { discussion { id } } }"
-              }')
-
-            response=$(curl -s -X POST \
-              -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-              -H "Content-Type: application/json" \s
-              -d "$query" \
-              https://api.github.com/graphql
-            )
+            response=$(curl -i -H 'Content-Type: application/json' -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" -X POST -d '{"query": "mutation {updateDiscussion(discussionId: \"${{ discussion_id }}\", body: \"hello\") {discussion}}"}' https://api.github.com/graphql)
 
             if echo "$response" | grep -q '"errors"'; then
               echo "failed: $response"
