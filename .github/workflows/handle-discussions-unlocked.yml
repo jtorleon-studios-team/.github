@@ -50,11 +50,13 @@ jobs:
              }'\
           )
 
-          playload=$( jq -n\
-            --arg mutation "mutation { updateDiscussion( input: $playloadUpdateDiscussion ) { discussion { id } } }" \
+          payload=$( jq -n\
+            --arg mutation "mutation(\$discussionId: ID!, \$body: String!) { updateDiscussion(input: { discussionId: \$discussionId, body: \$body }) { discussion { id } } }" \
+            --argjson variables "$payloadUpdateDiscussion" \
             '{
-               query: $mutation
-             }'\
+              query: $mutation,
+              variables: $variables
+            }'\
           )
 
           curl -i -H 'Content-Type: application/json' \
