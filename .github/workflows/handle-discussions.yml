@@ -17,19 +17,19 @@ jobs:
             discussion_id="${{ github.event.discussion.id }}"
             new_body="success"
 
-          query=$(jq -n \
-            --arg id "$discussion_id" \
-            --arg body "$new_body" \
-            '{
-              "query": "mutation {
-                updateDiscussion(input: {discussionId: \($id), body: \($body)}) {
-                  discussion {
-                    id
-                    body
+            query=$(jq -n \
+              --arg id "$discussion_id" \
+              --arg body "test" \
+              '{
+                "query": "mutation {
+                  updateDiscussion(input: {discussionId: \($id), body: \($body)}) {
+                    discussion {
+                      id
+                      body
+                    }
                   }
-                }
-              }"
-            }')
+                }"
+              }')
 
             response=$(curl -s -X POST \
               -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
