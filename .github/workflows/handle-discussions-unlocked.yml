@@ -43,7 +43,7 @@ jobs:
           textx=${{ steps.prepare-data.outputs.text }}
           text="test"
 
-          mut=mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"tfsfse\"}) {discussion { id } }}
+          mut="mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"tfsfse\"}) {discussion { id } }}"
 
           response=$(curl -i -H 'Content-Type: application/json' -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" -X POST -d "{\"query\": \"$mut\"}" https://api.github.com/graphql)
 
