@@ -36,31 +36,16 @@ jobs:
         run: |
           discussion_number="${{ github.event.discussion.number }}"
           discussion_url="https://github.com/orgs/jtorleon-studios-team/discussions/$discussion_number"
-          author_name="test"
-          avatar_url="https://raw.githubusercontent.com/jtorleon-studios-team/.github/refs/heads/main/assets/polls.png"
-
           messageToJson=$( jq -n\
             --arg title "A polls has been created" \
-            --arg author_name "$author_name" \
-            --arg avatar_url "$avatar_url"  \
             --arg open_url "$discussion_url" \
             '{
               content: null,
               embeds: [
                 {
-                  title: $title,
-                  color: 39129,
-                  author: {
-                    name: $author_name,
-                    url: $open_url,
-                    icon_url: $avatar_url
-                  },
+                  title: $title, color: 39129,
                   fields: [
-                    { 
-                      name: "Open on github",
-                      value: $open_url,
-                      inline: false
-                    }
+                    { name: "Open on github", value: $open_url, inline: false }
                   ],
                   image: {
                     url: "https://raw.githubusercontent.com/jtorleon-studios-team/.github/refs/heads/main/assets/polls.png"
@@ -71,5 +56,5 @@ jobs:
           )
           curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}
 
-          messageToJson=$( jq -n--arg content "|| $discussion_url ||" '{ content: $content }')
+          messageToJson=$( jq -n --arg content "|| $discussion_url ||" '{ content: $content }')
           curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}
