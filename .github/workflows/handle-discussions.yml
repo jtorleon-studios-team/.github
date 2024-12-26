@@ -15,7 +15,7 @@ jobs:
 
           if [ "${{ github.event.discussion.category.name }}" == "Announcements" ]; then
             discussion_id="${{ github.event.discussion.id }}"
-            new_body="success"
+
 
             query=$(jq -n \
               --arg id "$discussion_id" \
@@ -25,7 +25,6 @@ jobs:
                   updateDiscussion(input: {discussionId: \($id), body: \($body)}) {
                     discussion {
                       id
-                      body
                     }
                   }
                 }"
