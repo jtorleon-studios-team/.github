@@ -48,22 +48,24 @@ jobs:
             '{
               content: $content,
               embeds: [
-                title: $title,
-                color: 39129,
-                author: {
-                  name: $author_name,
-                  url: $open_url,
-                  icon_url: $avatar_url
-                },
-                fields: [
-                  { 
-                    name: "Open on github",
-                    value: $open_url,
-                    inline: false
+                {
+                  title: $title,
+                  color: 39129,
+                  author: {
+                    name: $author_name,
+                    url: $open_url,
+                    icon_url: $avatar_url
+                  },
+                  fields: [
+                    { 
+                      name: "Open on github",
+                      value: $open_url,
+                      inline: false
+                    }
+                  ],
+                  image: {
+                    url: "https://raw.githubusercontent.com/jtorleon-studios-team/.github/refs/heads/main/assets/polls.png"
                   }
-                ],
-                image: {
-                  url: "https://raw.githubusercontent.com/jtorleon-studios-team/.github/refs/heads/main/assets/polls.png"
                 }
               ]
              }'\
