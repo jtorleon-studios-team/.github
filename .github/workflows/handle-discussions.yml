@@ -34,8 +34,8 @@ jobs:
             if echo "$response" | grep -q '"errors"'; then
               echo "failed: $response"
               exit 1
-            else
-              echo "succes discussion edited"
+            else 
+              echo "succes: $response"
             fi
 
           fi
