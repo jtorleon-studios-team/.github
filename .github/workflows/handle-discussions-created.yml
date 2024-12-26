@@ -1,4 +1,4 @@
-name: Handle Discussion
+name: Handle Discussion Created
 on:
   discussion:
     types: [created]
@@ -50,5 +50,5 @@ jobs:
               embeds: [ ]
              }'\
           )
-          
+
           curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}

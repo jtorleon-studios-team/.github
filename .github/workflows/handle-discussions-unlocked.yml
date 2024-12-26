@@ -1,4 +1,4 @@
-name: Handle Discussion
+name: Handle Discussion Unlocked
 on:
   discussion:
     types: [unlocked]
@@ -36,7 +36,7 @@ jobs:
         run: |
           str="# Stay in the Loop"
           str+="\n## New Updates and content You’ll Love! 💥"
-          
+
           str+="\nTexte ligne 3"
 
           echo "text=$str" >> $GITHUB_OUTPUT
