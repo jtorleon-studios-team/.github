@@ -49,8 +49,8 @@ jobs:
           payload=$( jq -n \
             --arg mutation "mutation(\$discussionId: ID!, \$body: String!) { updateDiscussion(input: { discussionId: \$discussionId, body: \$body }) { discussion { id } } }" \
             --argjson variables "$payloadUpdateDiscussion" \
-            '{query: $mutation, variables: $variables}' )
-            
+            '{query: "$mutation", variables: $variables}' )
+
           curl -i -H 'Content-Type: application/json' \
             -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
             -X POST -d "$playload" https://api.github.com/graphql
