@@ -34,12 +34,10 @@ jobs:
       - id: prepare-data
         name: Prepare data
         run: |
-          owner="${{ github.repository_owner }}"
-          repo="${{ github.repository }}"
-          discussion_id="${{ github.event.discussion.id }}"
-          discussion_url="https://github.com/$owner/$repo/discussions/$discussion_id"
-          author_name="${{ github.event.sender.name }}"
-          avatar_url="${{ github.event.sender.avatar_url }}"
+          discussion_number="${{ github.event.discussion.number }}"
+          discussion_url="https://github.com/orgs/jtorleon-studios-team/discussions/$discussion_number"
+          author_name="test"
+          avatar_url="https://raw.githubusercontent.com/jtorleon-studios-team/.github/refs/heads/main/assets/polls.png"
 
           messageToJson=$( jq -n\
             --arg title "A polls has been created" \
