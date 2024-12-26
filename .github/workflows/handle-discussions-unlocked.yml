@@ -43,13 +43,13 @@ jobs:
         run: |
           playload=$( jq -n\
             --arg discussionId "${{ github.event.discussion.node_id }}" \
-            --arg decodedBody "hello wolrd"
+            --arg decodedBody "hello wolrd" \
             '{
                discussionId: $discussionId
                decodedBody: $decodedBody
              }'\
           )
-          
+
           curl -i -H 'Content-Type: application/json' \
             -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
             -X POST -d "{ \"query\": \"mutation {updateDiscussion(input: { $playload }) {discussion { id } }}\"}" https://api.github.com/graphql
