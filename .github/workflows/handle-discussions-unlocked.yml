@@ -34,8 +34,11 @@ jobs:
       - id: prepare-data
         name: Prepare data
         run: |
-          body="# Stay in the Loop \n ## New Updates and content You'll Love! 💥"
+          strH="# Stay in the Loop \n ## New Updates and content You'll Love! 💥"
+          strX="### 🔹 [From X/Twitter 📱](#)"
+          strT="### 🔹 [Threads 🌐](#)"
 
+          body="strH \n $strX \n $strT"
           script='{"query": "mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"'$body'\"}) {discussion { id } }}"}'
           curl -i -H 'Content-Type: application/json' \
             -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
