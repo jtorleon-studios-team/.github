@@ -35,7 +35,8 @@ jobs:
         name: Prepare data
         run: |
           str=$(echo -e "# Stay in the Loop\n## New Updates and content You'll Love! 💥\nHello!")
-          echo "text=$str" >> $GITHUB_OUTPUT
+          encoded_str=$(echo -n "$str" | base64)
+          echo "text=$encoded_str" >> $GITHUB_OUTPUT
 
       - name: Update Github Discussions
         run: |
