@@ -30,8 +30,9 @@ jobs:
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
-      
-      - name: send polls to discord
+
+      - id: prepare-data
+        name: Prepare data
         run: |
           discussion_number="${{ github.event.discussion.number }}"
           discussion_url="https://github.com/orgs/jtorleon-studios-team/discussions/$discussion_number"
@@ -53,4 +54,6 @@ jobs:
               ]
              }'\
           )
+          curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}
+          messageToJson=$( jq -n --arg content "[click here for open in github]($discussion_url)" '{ content: $content }')
           curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}
