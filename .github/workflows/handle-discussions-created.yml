@@ -39,17 +39,32 @@ jobs:
           discussion_id="${{ github.event.discussion.id }}"
           discussion_url="https://github.com/$owner/$repo/discussions/$discussion_id"
 
-
-          str="# A polls has been created"
-          str+="\n[Open on github]($discussion_url)"
-
           messageToJson=$( jq -n\
             --arg content "|| $discussion_url ||" \
+            --arg title "A polls has been created" \
+            --arg author_name "${{ github.event.discussion.user.name }}" \
+            --arg avatar_url "${{ github.event.discussion.user.avatar_url }}" \
+            --arg open_url "$discussion_url" \
             '{
               content: $content,
               embeds: [
                 title: $title,
                 color: 39129,
+                author: {
+                  name: $author_name,
+                  url: $open_url,
+                  icon_url: $avatar_url
+                },
+                fields: [
+                  { 
+                    name: "Open on github",
+                    value: $open_url,
+                    inline: false
+                  }
+                ],
+                image: {
+                  url: "https://raw.githubusercontent.com/jtorleon-studios-team/.github/refs/heads/main/assets/polls.png"
+                }
               ]
              }'\
           )
