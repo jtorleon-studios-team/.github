@@ -34,7 +34,7 @@ jobs:
       - id: prepare-data
         name: Prepare data
         run: |
-          body="# Stay in the Loop \n ## New Updates and content You'll Love!"
+          body="# Stay in the Loop \n ## New Updates and content You'll Love! 💥"
 
           script='{"query": "mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"'$body'\"}) {discussion { id } }}"}'
           curl -i -H 'Content-Type: application/json' \
