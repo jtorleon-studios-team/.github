@@ -1,9 +1,7 @@
 name: Handle Discussion
-
 on:
   discussion:
     types: [unlocked]
-
 jobs:
   filter-discussion:
     runs-on: ubuntu-22.04
@@ -14,13 +12,16 @@ jobs:
         name: Filter Discussion
         run: |
           echo "::group::Filter Discussion"
-          echo "discussion id ${{ github.event.discussion.node_id }} in category ${{ github.event.discussion.category.name }} ${{ github.event.discussion.category.node_id }}"
-          echo "::endgroup::"
-          if [ "${{ github.event.discussion.category.name }}" != "Announcements" ]; then
-            echo "status=ignore" >> $GITHUB_OUTPUT
-          else
+          echo "discussion ${{ github.event.discussion.node_id }} ${{ github.event.discussion.title }}"
+          echo "discussion category ${{ github.event.discussion.category.node_id }} ${{ github.event.discussion.category.name }}"
+          if [ "${{ github.event.discussion.category.name }}" == "Announcements" ]; then
+            echo "match"
             echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "ignored"
+            echo "status=ignored" >> $GITHUB_OUTPUT
           fi
+          echo "::endgroup::"
 
   handle-discussion:
     runs-on: ubuntu-22.04
@@ -32,7 +33,13 @@ jobs:
 
       - id: prepare-data
         name: Prepare data
-        run: echo "text=Hello, World World!" >> $GITHUB_OUTPUT
+        run: |
+          str="# Stay in the Loop"
+          str+="\n## New Updates and content You’ll Love! 💥"
+          
+          str+="\nTexte ligne 3"
+
+          echo "text=$str" >> $GITHUB_OUTPUT
 
       - name: Update Github Discussions
         run: |

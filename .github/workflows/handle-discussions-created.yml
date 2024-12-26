@@ -1,0 +1,54 @@
+name: Handle Discussion
+on:
+  discussion:
+    types: [created]
+jobs:
+  filter-discussion:
+    runs-on: ubuntu-22.04
+    outputs:
+      status: ${{ steps.set-output-filter.outputs.status }}
+    steps:
+      - id: set-output-filter
+        name: Filter Discussion
+        run: |
+          echo "::group::Filter Discussion"
+          echo "discussion ${{ github.event.discussion.node_id }} ${{ github.event.discussion.title }}"
+          echo "discussion category ${{ github.event.discussion.category.node_id }} ${{ github.event.discussion.category.name }}"
+          if [ "${{ github.event.discussion.category.name }}" == "Pools" ]; then
+            echo "match"
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "ignored"
+            echo "status=ignored" >> $GITHUB_OUTPUT
+          fi
+          echo "::endgroup::"
+
+  handle-discussion:
+    runs-on: ubuntu-22.04
+    needs: filter-discussion
+    if: needs.filter-discussion.outputs.status == 'success'
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v4
+
+      - id: prepare-data
+        name: Prepare data
+        run: |
+          owner="${{ github.repository_owner }}"
+          repo="${{ github.repository }}"
+          discussion_id="${{ github.event.discussion.id }}"
+          discussion_url="https://github.com/$owner/$repo/discussions/$discussion_id"
+
+
+          str="# A polls has been created"
+          str+="\n[Open on github]($discussion_url)"
+
+          messageToJson=$( jq -n\
+            --arg content "$str" \
+            '{
+              content: $content,
+              embeds: [ ]
+             }'\
+          )
+          
+          curl -H "Content-Type: application/json" -d "${messageToJson}" ${{ secrets.POOLS_DISCORD }}
