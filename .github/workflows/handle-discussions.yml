@@ -1,6 +1,7 @@
 name: Handle Discussion
 
 on:
+  workflow_dispatch:
   discussion:
     types: [unlocked]
 
