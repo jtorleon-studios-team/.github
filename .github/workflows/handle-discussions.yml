@@ -5,19 +5,28 @@ on:
     types: [unlocked]
 
 jobs:
-  handle-discussion:
+  filter-discussion:
     runs-on: ubuntu-22.04
+    outputs:
+      status: ${{ steps.set-output-filter.outputs.status }}
     steps:
-      - name: Filter Discussion
+      - id: set-output-filter
+        name: Filter Discussion
         run: |
           echo "::group::Filter Discussion"
           echo "discussion id ${{ github.event.discussion.node_id }} in category ${{ github.event.discussion.category.name }} ${{ github.event.discussion.category.node_id }}"
           echo "::endgroup::"
           if [ "${{ github.event.discussion.category.name }}" != "Announcements" ]; then
-            echo "Category does not match. Stopping the workflow."
-            exit 0
+            echo "status=ignore" >> $GITHUB_OUTPUT
+          else
+            echo "status=success" >> $GITHUB_OUTPUT
           fi
 
+  handle-discussion:
+    runs-on: ubuntu-22.04
+    needs: filter-discussion
+    if: needs.filter-discussion.outputs.status == 'success'
+    steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
