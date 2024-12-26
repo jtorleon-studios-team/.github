@@ -43,7 +43,7 @@ jobs:
       - name: Update Github Discussions
         run: |
           body='test'
-          script='{"query": "mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"$body\"}) {discussion { id } }}"}'
+          script='{"query": "mutation {updateDiscussion(input: {discussionId: \"${{ github.event.discussion.node_id }}\", body: \"'$body'\"}) {discussion { id } }}"}'
           curl -i -H 'Content-Type: application/json' \
             -H "Authorization: bearer ${{ secrets.GITHUB_TOKEN }}" \
             -X POST -d "$script" https://api.github.com/graphql
