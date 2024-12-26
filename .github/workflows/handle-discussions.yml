@@ -6,16 +6,16 @@ on:
 
 jobs:
   handle-discussion:
-    runs-on: ubuntu-latest
+    runs-on: subuntu-22.04
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v4
 
       - id: prepare-data
         name: Prepare data
-        run: echo "::set-output name=text::Hello, World!"
+        run: echo "text=Hello, World!" >> $GITHUB_OUTPUT
 
-      - name: Update discussions
+      - name: Update Github Discussions
         run: |
           echo "Discussion with id ${{ github.event.discussion.node_id }} unlocked in category ${{ github.event.discussion.category.name }} ${{ github.event.discussion.category.node_id }}"
 
