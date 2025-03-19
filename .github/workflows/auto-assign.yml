@@ -4,23 +4,10 @@ on:
     types: [opened]
 jobs:
   run:
-    runs-on: ubuntu-latest
+    uses: jtorleon-studios-team/workflows/.github/workflows/auto-assign.yml@main
     permissions:
+      contents: read
       issues: write
       pull-requests: write
-    steps:
-    - run: gh issue edit "$NUMBER" --add-label "$LABELS"
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_REPO: ${{ github.repository }}
-        NUMBER: ${{ github.event.issue.number }}
-        LABELS: "awaiting contributions"
-    - uses: pozil/auto-assign-issue@v1
-      with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: tmslpm, jtl-elisa
-          numOfAssignee: 2
-    - uses: actions/add-to-project@v1.0.2
-      with:
-        project-url: https://github.com/orgs/jtorleon-studios-team/projects/4
-        github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+    secrets:
+      ADD_TO_PROJECT_PAT : ${{ secrets.ADD_TO_PROJECT_PAT }}
