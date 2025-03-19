@@ -4,6 +4,7 @@ on:
     types: [created]
 jobs:
   run:
+    if: github.actor != github.event.issue.user.login
     runs-on: ubuntu-latest
     permissions:
       issues: write
