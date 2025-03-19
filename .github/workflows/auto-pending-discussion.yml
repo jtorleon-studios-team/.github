@@ -3,7 +3,7 @@ on:
   issue_comment:
     types: [created]
 env:
-  GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+  MY_GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
 jobs:
   run:
     runs-on: ubuntu-latest
