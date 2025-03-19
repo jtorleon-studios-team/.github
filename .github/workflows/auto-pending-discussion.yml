@@ -14,7 +14,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
-          LABELS: "Pending Discussion"
+          LABELS: "pending discussion"
       - uses: actions/add-to-project@v1.0.2
         with:
           project-url: https://github.com/orgs/jtorleon-studios-team/projects/4
