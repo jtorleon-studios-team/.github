@@ -14,4 +14,4 @@ jobs:
       - uses: srggrs/assign-one-project-github-action@1.2.1
         with:
           project: 'https://github.com/orgs/jtorleon-studios-team/projects/4'
-          column_name: 'Pending Discussion'
+          column_name: 'Pending-Discussion'
