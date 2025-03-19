@@ -2,8 +2,6 @@ name: Auto Add To Pending Discussion
 on:
   issue_comment:
     types: [created]
-env:
-  MY_GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
 jobs:
   run:
     runs-on: ubuntu-latest
@@ -11,7 +9,17 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: srggrs/assign-one-project-github-action@1.2.1
+      - run: gh issue edit "$NUMBER" --add-label "$LABELS"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+          LABELS: "Pending Discussion"
+      - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
+        env:
+          MY_GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
         with:
-          project: 'https://github.com/orgs/jtorleon-studios-team/projects/4'
-          column_name: 'Pending-Discussion'
+          project-url: "https://github.com/orgs/jtorleon-studios-team/projects/4"
+          column-name: "Pending Discussion"
+          label-name: "Pending Discussion"
+          action-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
