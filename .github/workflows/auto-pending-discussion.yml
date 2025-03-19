@@ -1,0 +1,16 @@
+name: Auto Add To Pending Discussion
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: alex-page/github-project-automation-plus@v0.8.3
+        with:
+          project: Community Issue Tracker
+          column: Pending Discussion
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
