@@ -11,3 +11,5 @@ jobs:
       pull-requests: write
     secrets:
       ADD_TO_PROJECT_PAT : ${{ secrets.ADD_TO_PROJECT_PAT }}
+    with:
+      token: ${{ secrets.ACCESS_WORKFLOWS }}
