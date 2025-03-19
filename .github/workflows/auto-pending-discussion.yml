@@ -15,6 +15,10 @@ jobs:
           GH_REPO: ${{ github.repository }}
           NUMBER: ${{ github.event.issue.number }}
           LABELS: "Pending Discussion"
+
+      - name: Wait for label to be applied
+        run: sleep 10
+        
       - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
         env:
           MY_GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
