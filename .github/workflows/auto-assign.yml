@@ -6,7 +6,4 @@ on:
 jobs:
   run:
     uses: jtorleon-studios-team/.workflows/.github/workflows/auto-assign.yml@main
-    permissions:
-      contents: read
-      issues: write
-      pull-requests: write
+    secrets: inherit
