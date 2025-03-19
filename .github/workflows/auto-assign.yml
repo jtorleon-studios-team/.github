@@ -1,5 +1,6 @@
 name: Auto Assign
 on:
+  workflow_dispatch:
   issues:
     types: [opened]
 jobs:
