@@ -16,14 +16,11 @@ jobs:
           NUMBER: ${{ github.event.issue.number }}
           LABELS: "Pending Discussion"
 
-      - name: Wait for label to be applied
-        run: sleep 10
-        
-      - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
-        env:
-          MY_GITHUB_TOKEN: ${{ secrets.ADD_TO_PROJECT_PAT }}
+      - uses: actions/add-to-project@v1.0.2
         with:
-          project-url: "https://github.com/orgs/jtorleon-studios-team/projects/4"
-          column-name: "Pending Discussion"
-          label-name: "Pending Discussion"
-          action-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          project-url: https://github.com/orgs/jtorleon-studios-team/projects/4
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+        id: add-project
+
+      - name: Debug itemId
+        run: echo "${{ steps.add-project.outputs.itemId }}"
