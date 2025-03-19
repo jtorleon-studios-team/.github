@@ -24,3 +24,12 @@ jobs:
 
       - name: Debug itemId
         run: echo "${{ steps.add-project.outputs.itemId }}"
+
+
+      - uses: titoportas/update-project-fields@v0.1.0
+        with:
+          project-url: https://github.com/users/titoportas/projects/2
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          item-id: ${{ steps.add-project.outputs.itemId }}
+          field-keys: Status
+          field-values: Pending Discussion
