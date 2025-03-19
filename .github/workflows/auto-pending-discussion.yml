@@ -1,4 +1,5 @@
-name: Auto Add To Pending Discussion
+name: Pending Discussion
+run-name: ${{ github.actor }} - pending discussion
 on:
   issue_comment:
     types: [created]
