@@ -13,4 +13,4 @@ jobs:
         with:
           project: Community Issue Tracker
           column: Pending Discussion
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
