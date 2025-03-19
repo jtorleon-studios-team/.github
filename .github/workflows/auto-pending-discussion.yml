@@ -9,8 +9,8 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - uses: alex-page/github-project-automation-plus@v0.8.3
+      - uses: konradpabjan/move-labeled-or-milestoned-issue@v2.0
         with:
-          project: Community Issue Tracker
-          column: Pending Discussion
-          repo-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+          project-url: "https://github.com/orgs/jtorleon-studios-team/projects/4"
+          column-name: "Pending Discussion"
+          action-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
