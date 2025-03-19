@@ -13,4 +13,5 @@ jobs:
         with:
           project-url: "https://github.com/orgs/jtorleon-studios-team/projects/4"
           column-name: "Pending Discussion"
+          label-name: "Pending Discussion"
           action-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
