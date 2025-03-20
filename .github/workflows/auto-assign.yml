@@ -1,7 +1,6 @@
 name: Auto Assign
 run-name: ${{ github.actor }} - Auto Assign
 on:
-  workflow_dispatch:
   issues:
     types: [opened]
 jobs:
