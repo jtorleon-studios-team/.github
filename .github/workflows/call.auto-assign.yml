@@ -1,0 +1,32 @@
+name: Auto Assign
+run-name: ${{ github.actor }} run ${{ github.action }}
+on:
+  issues:
+    types: [opened]
+  workflow_call:
+    secrets:
+      ADD_TO_PROJECT_PAT:
+        required: true
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - run: gh issue edit "$NUMBER" --add-label "$LABELS"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_REPO: ${{ github.repository }}
+        NUMBER: ${{ github.event.issue.number }}
+        LABELS: "awaiting contributions"
+    - uses: pozil/auto-assign-issue@af6beea6bdf1e8eb373f061c5bc168681fc6d011 # v4.0.1
+      with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: tmslpm, jtl-elisa
+          numOfAssignee: 2
+    - uses: actions/add-to-project@5afcf98fcd03f1c2f92c3c83f58ae24323cc57fd # v2.0.0
+      with:
+        project-url: https://github.com/orgs/jtorleon-studios-team/projects/4
+        github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+        
